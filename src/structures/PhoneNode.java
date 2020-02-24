@@ -25,4 +25,5 @@ public class PhoneNode {
     public void setNext(PhoneNode next) {
         this.next = next;
     }
+
 }

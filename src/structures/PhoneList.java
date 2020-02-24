@@ -16,12 +16,29 @@ public class PhoneList {
             head = n;
         }
         else {
-            PhoneNode temp = head.getNext();
-            temp.setNext(n);
+            n.setNext(head);
+            head = n;
         }
         count++;
     }
 
 
+    public void printNumbers() {
+        if (count == 1){
+            System.out.print("Contact Number: ");
+        }
+        else {
+            System.out.print("Contact Number(s): ");
+        }
+
+        PhoneNode temp = head;
+        while (temp != null) {
+            System.out.print(temp.getData());
+            temp = temp.getNext();
+            if (temp != null)
+                System.out.print(", ");
+        }
+        System.out.println();
+    }
 
 }

@@ -4,7 +4,7 @@ public class Person {
 
     private String firstName;
     private String lastName;
-    private PhoneList phones;
+    private PhoneList phones = new PhoneList();
     private String email;
 
     public String getFirstName() {
@@ -40,6 +40,7 @@ public class Person {
     }
 
 
-
-
+    public void printNumbers() {
+        phones.printNumbers();
+    }
 }

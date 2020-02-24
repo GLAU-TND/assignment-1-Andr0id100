@@ -55,12 +55,44 @@ public class PersonList {
     }
 
     public void print() {
+
         PersonNode temp = head;
         while (temp!=null){
-            System.out.print(temp.getData().getFirstName()+" -> ");
+            temp.printCard();
             temp = temp.getNext();
         }
-        System.out.println("null");
     }
 
+    public void search(String firstName) {
+        PersonNode temp = head;
+        boolean flag = false;
+        while (temp!=null && temp.getData().getFirstName().compareTo(firstName) <= 0) {
+            if (temp.getData().getFirstName().compareTo(firstName) == 0){
+                flag = true;
+                temp.printCard();
+            }
+            temp = temp.getNext();
+        }
+        if (!flag) {
+            System.out.println("NO RESULTS FOUND");
+        }
+    }
+
+    public void printFirstNames() {
+        int index = 1;
+        PersonNode temp = head;
+        while (temp!=null) {
+            System.out.println(index+". "
+                    +temp.getData().getFirstName()
+                    +" "+temp.getData().getLastName());
+            temp = temp.getNext();
+        }
+    }
+
+    public void removeIndex(int n) throws ElementMissingException{
+        PersonNode temp = head;
+        for (int i=1;i<n;i++)
+            temp = temp.getNext();
+        remove(temp.getData().getFirstName());
+    }
 }
