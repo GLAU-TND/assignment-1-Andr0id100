@@ -13,63 +13,44 @@ public class PersonList {
     public void insert(Person n) {
         PersonNode pn = new PersonNode(n);
 
-//        if (head == null || head.getData().getFirstName().compareTo(n.getFirstName()) >= 0)
-//        {
-//            pn.setNext(head);
-//            head = pn;
-//        }
-//        else {
-//            PersonNode temp = head;
-//
-//            while (temp.getNext() != null &&
-//                    temp.getNext().getData().getFirstName().compareTo(n.getFirstName()) >= 0)
-//                temp = temp.getNext();
-//
-//            pn.setNext(temp.getNext());
-//            temp.setNext(pn);
-//        }
-
-
-        if (head == null)
+        if (head == null || n.getFirstName().compareTo(head.getData().getFirstName()) <= 0)
+        {
+            pn.setNext(head);
             head = pn;
-        else {
-            PersonNode last = head;
-            PersonNode temp = head;
-            while (temp!=null) {
-                System.out.println(temp.getData().getFirstName());
-                if (n.getFirstName().compareTo(temp.getData().getFirstName()) <= 0) {
-                    break;
-                }
-                last = temp;
-                temp = temp.getNext();
-            }
-            if (last == head) {
-                pn.setNext(head);
-                head = pn;
-            }else {
-                pn.setNext(last.getNext());
-                last.setNext(pn);
-            }
         }
+        else {
+            PersonNode temp = head;
+
+            while (temp.getNext() != null &&
+                    n.getFirstName().compareTo(temp.getNext().getData().getFirstName()) >= 0)
+                temp = temp.getNext();
+
+            pn.setNext(temp.getNext());
+            temp.setNext(pn);
+        }
+
     }
 
     public void remove(String firstName) throws ElementMissingException {
-        PersonNode last = head;
-        PersonNode temp = head.getNext();
-        int result = -1;
-        while (temp != null) {
-            result = firstName.compareTo(temp.getData().getFirstName());
-            if (result <= 0){
-                break;
-            }
-            last = temp;
-            temp = temp.getNext();
-        }
-
-        if (result < 0)
+        if (head == null){
             throw new ElementMissingException();
+        }
+        else if (head.getData().getFirstName().compareTo(firstName) == 0) {
+            head = head.getNext();
+        }
         else {
-            last.setNext(last.getNext().getNext());
+            PersonNode temp = head;
+            while (temp.getNext() != null &&
+                    firstName.compareTo(temp.getNext().getData().getFirstName()) > 0)
+                temp = temp.getNext();
+
+            if (temp.getNext()!=null) {
+                temp.setNext(temp.getNext().getNext());
+            }
+            else {
+
+                throw new ElementMissingException();
+            }
         }
     }
 

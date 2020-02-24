@@ -1,8 +1,10 @@
 package app;
 
+import exceptions.ElementMissingException;
 import structures.Person;
 import structures.PersonList;
 
+import javax.sound.midi.SysexMessage;
 import java.util.Scanner;
 
 public class Menu {
@@ -48,20 +50,5 @@ public class Menu {
         sc.close();
         return choice;
 
-    }
-
-    public void test() {
-        PersonList l = new PersonList();
-        Person p1 = new Person();
-        p1.setFirstName("C");
-        l.insert(p1);
-        Person p2 = new Person();
-        p2.setFirstName("B");
-        l.insert(p2);
-        Person p3 = new Person();
-        p3.setFirstName("A");
-        l.insert(p3);
-
-        l.print();
     }
 }
